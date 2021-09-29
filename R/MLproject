@@ -1,0 +1,8 @@
+name: iris
+
+entry_points:
+  main:
+    parameters:
+      cp: {type: float, default: 0.02}
+      maxdepth: {type: int, default: 13}
+    command: "Rscript train.R -P cp={cp} maxdepth={maxdepth}"

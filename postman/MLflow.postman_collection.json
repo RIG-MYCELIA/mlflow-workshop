@@ -1,0 +1,310 @@
+{
+	"info": {
+		"_postman_id": "7dae1a53-0fd6-458a-bfc8-ad6561955e6f",
+		"name": "MLflow",
+		"description": "Voorbeeld requests in het kader van de MLflow hackathon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get wine quality prediction",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n    {\r\n        \"alcohol\": 12.8,\r\n        \"chlorides\": 0.029,\r\n        \"citric acid\": 0.48,\r\n        \"density\": 0.98,\r\n        \"fixed acidity\": 6.2,\r\n        \"free sulfur dioxide\": 29,\r\n        \"pH\": 3.33,\r\n        \"residual sugar\": 1.2,\r\n        \"sulphates\": 0.39,\r\n        \"total sulfur dioxide\": 75,\r\n        \"volatile acidity\": 0.66\r\n    }\r\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://adb-490315821028189.9.azuredatabricks.net/model/tech-summit-wine-model/Production/invocations",
+					"protocol": "https",
+					"host": [
+						"adb-490315821028189",
+						"9",
+						"azuredatabricks",
+						"net"
+					],
+					"path": [
+						"model",
+						"tech-summit-wine-model",
+						"Production",
+						"invocations"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List experiments",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://adb-490315821028189.9.azuredatabricks.net/api/2.0/preview/mlflow/experiments/list",
+					"protocol": "https",
+					"host": [
+						"adb-490315821028189",
+						"9",
+						"azuredatabricks",
+						"net"
+					],
+					"path": [
+						"api",
+						"2.0",
+						"preview",
+						"mlflow",
+						"experiments",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get run",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://adb-490315821028189.9.azuredatabricks.net/api/2.0/mlflow/runs/get?run_id=1c0d8ca9f94a484385603169ebd7b265",
+					"protocol": "https",
+					"host": [
+						"adb-490315821028189",
+						"9",
+						"azuredatabricks",
+						"net"
+					],
+					"path": [
+						"api",
+						"2.0",
+						"mlflow",
+						"runs",
+						"get"
+					],
+					"query": [
+						{
+							"key": "run_id",
+							"value": "1c0d8ca9f94a484385603169ebd7b265"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get registered model",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://adb-490315821028189.9.azuredatabricks.net/api/2.0/mlflow/registered-models/get?name=mlflow",
+					"protocol": "https",
+					"host": [
+						"adb-490315821028189",
+						"9",
+						"azuredatabricks",
+						"net"
+					],
+					"path": [
+						"api",
+						"2.0",
+						"mlflow",
+						"registered-models",
+						"get"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "mlflow"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transition registered model to staging",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"mlflow\",\r\n    \"version\":\"1\",\r\n    \"stage\":\"Staging\",\r\n    \"archive_existing_versions\":true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://adb-490315821028189.9.azuredatabricks.net/api/2.0/preview/mlflow/model-versions/transition-stage",
+					"protocol": "https",
+					"host": [
+						"adb-490315821028189",
+						"9",
+						"azuredatabricks",
+						"net"
+					],
+					"path": [
+						"api",
+						"2.0",
+						"preview",
+						"mlflow",
+						"model-versions",
+						"transition-stage"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "mlflow",
+							"disabled": true
+						},
+						{
+							"key": "version",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "stage",
+							"value": "Staging",
+							"disabled": true
+						},
+						{
+							"key": "archive_existing_versions",
+							"value": "true",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Transition registered model to production",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{token}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "dapi60a10817b7a69091cba006705e978{{token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"mlflow\",\r\n    \"version\":\"1\",\r\n    \"stage\":\"Production\",\r\n    \"archive_existing_versions\":true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://adb-490315821028189.9.azuredatabricks.net/api/2.0/preview/mlflow/model-versions/transition-stage",
+					"protocol": "https",
+					"host": [
+						"adb-490315821028189",
+						"9",
+						"azuredatabricks",
+						"net"
+					],
+					"path": [
+						"api",
+						"2.0",
+						"preview",
+						"mlflow",
+						"model-versions",
+						"transition-stage"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "mlflow",
+							"disabled": true
+						},
+						{
+							"key": "version",
+							"value": "1",
+							"disabled": true
+						},
+						{
+							"key": "stage",
+							"value": "Staging",
+							"disabled": true
+						},
+						{
+							"key": "archive_existing_versions",
+							"value": "true",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
